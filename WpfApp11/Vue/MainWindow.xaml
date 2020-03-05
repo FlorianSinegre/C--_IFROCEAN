@@ -1,0 +1,351 @@
+﻿<Window x:Class="WpfApp11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp11"
+        mc:Ignorable="d"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        Title="Fenêtre Principale" Height="500" Width="800">
+    <DockPanel>
+
+        <TextBox AcceptsReturn="True" />
+
+        <!-- ###########################################L'AJOUT DES PERSONNES ###############################################################-->
+        <TabControl Margin="0,0,0,0" Height="480" Width="790" Background="FloralWhite" >
+            <TabItem Header="Ajouter Personne" Background="DimGray"   >
+
+                <Grid Name ="grigrid" Height="423" Margin="-17,-3,-4,0" VerticalAlignment="Top" Background="FloralWhite">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="194*"/>
+                        <ColumnDefinition Width="315*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="250*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="4">
+
+                        <Label Content="NOM" VerticalAlignment="Center" FontWeight="Heavy" Margin="10" HorizontalAlignment="Center"></Label>
+                        <!--            <TextBox Name="nomTextBox" TextChanged="nomChanged"/> -->
+                        <TextBox Name="nomTextBox" Height="30" VerticalContentAlignment="Center" Margin="10" HorizontalAlignment="Center" Width="400"/>
+                        <Label Content="PRENOM" VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <!-- <TextBox Name="prenomTextBox" TextChanged="prenomChanged"/> -->
+                        <TextBox Name="prenomTextBox" Height="30" Width="400" Margin="10" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                        <Button x:Name="nomPrenomButton" Content="Ajouter" MouseDoubleClick="nomPrenomButton_MouseDoubleClick" BorderBrush="#FF545454"  Height="35" Margin="0,5,311.4,0" HorizontalAlignment="Right" Width="160"  >
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Green" Offset="0.279"/>
+                                    <GradientStop Color="Green" Offset="0.779"/>
+                                    <GradientStop Color="Green" Offset="0.986"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <!--  <Button Content="Button" HorizontalAlignment="Left" Margin="156,218,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>-->
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="Liste des Personnes" Background="DimGray">
+
+                <StackPanel>
+                    <ScrollViewer Height="350" VerticalScrollBarVisibility="Visible" >
+                        <Grid Margin="10">
+                            <DataGrid Name="listePersonnes" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Center"  BorderBrush="Black" Background="#FFA4A4A4" SelectionChanged="listePersonnes_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="id" Binding="{Binding idPersonneProperty, Mode=OneWay}" />
+                                    <DataGridTextColumn Header="nom" Binding="{Binding nomProperty}" />
+                                    <DataGridTextColumn Header="prénom" Binding="{Binding prenomProperty, Mode=TwoWay}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ScrollViewer>
+                    <Button x:Name="supprimerButton" Content="Supprimer" MouseDoubleClick="supprimerButton_MouseDoubleClick" BorderBrush="#FF545454" HorizontalAlignment="Center" Margin="10" Height="35" Width="107" >
+
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0.279"/>
+                                <GradientStop Color="Red" Offset="0.779"/>
+                                <GradientStop Color="Red" Offset="0.986"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                </StackPanel>
+
+
+            </TabItem>
+
+            <!--<TabItem Header="Slider" RenderTransformOrigin="0.5,0.5">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-1.01"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Slider Name="sliderHeight"  Margin="0,0,0.333,102" ValueChanged="Slider_ValueChanged" />
+            </TabItem>-->
+
+            <!-- ###########################################FIN DE L'AJOUT DES PERSONNES ###############################################################-->
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+            <!-- ###########################################DEBUT DE L'AJOUT DES PRELEVEMENTS ###############################################################-->
+
+            <TabItem Header="Ajouter Prelevement" Background="Red">
+                <Grid Name ="grid" Height="300" Margin="0,0,0.300,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="141*"/>
+                        <ColumnDefinition Width="641*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="2" Margin="0,0,0.1,0">
+
+                        <Label Content="Type de prelevement" FontWeight="Heavy" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                        <!--            <TextBox Name="nomTextBox" TextChanged="nomChanged"/> -->
+                        <TextBox Name="TypeTextBox" Height="30" VerticalContentAlignment="Center" VerticalAlignment="Center" Width="400"/>
+                        <Label Content="PositionGPS" HorizontalAlignment="Center" Margin="15" FontWeight="Heavy" VerticalAlignment="Center"></Label>
+                        <!-- <TextBox Name="prenomTextBox" TextChanged="prenomChanged"/> -->
+                        <TextBox Name="PositionGPSTextBox" Width="400" Height="30" Margin="0,0,0.300,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Button x:Name="ajouterPrelevementButton" Content="Ajouter" MouseDoubleClick="ajouterPrelevementButton_MouseDoubleClick" BorderBrush="#FF545454" VerticalAlignment="Center" Margin="15" Height="35"  HorizontalAlignment="Center" Width="160" RenderTransformOrigin="0.5,2.31" >
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Green" Offset="0.279"/>
+                                    <GradientStop Color="Green" Offset="0.779"/>
+                                    <GradientStop Color="Green" Offset="0.986"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <!-- <Button Content="Button" HorizontalAlignment="Left" Margin="55.2,204,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.Column="1"/>-->
+                </Grid>
+
+            </TabItem>
+
+
+
+            <TabItem Header="Liste des Prelevement" Height="23" Margin="-2.2,-1.8,-1.6,-0.4" VerticalAlignment="Top" Background="Red">
+
+                <StackPanel>
+
+                    <Grid Margin="10">
+                        <ScrollViewer Height="350" VerticalScrollBarVisibility="Visible">
+                            <DataGrid x:Name="listePrelevement" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Center"  BorderBrush="Black"  Background="#FFA4A4A4" SelectionChanged="listePrelevements_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="id" Binding="{Binding idprelevementProperty, Mode=OneWay}" />
+                                    <DataGridTextColumn Header="PositionGPS" Binding="{Binding PositionGPSProperty}" />
+                                    <DataGridTextColumn Header="Type de prelevement" Binding="{Binding TypeProperty, Mode=TwoWay}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Button x:Name="supprimerButton_Prelevement" Content="Supprimer" MouseDoubleClick="supprimerButton_Prelevement_MouseDoubleClick" BorderBrush="#FF545454" VerticalAlignment="Center" HorizontalAlignment="Center" Height="35" Width="100"  >
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0.279"/>
+                                <GradientStop Color="Red" Offset="0.779"/>
+                                <GradientStop Color="Red" Offset="0.986"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+
+            </TabItem>
+
+            <!-- ###########################################FIN DE L'AJOUT DE PRELEVEMENT ###############################################################-->
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+            <!-- ###########################################DEBUT DE L'AJOUT DES PRELEVEMENTS ###############################################################-->
+            <TabItem Header="Ajouter des especes">
+                <Grid Name ="gridEspece" Height="300" Margin="0,0,0.300,0" VerticalAlignment="Top" Background="AliceBlue">
+
+                    <StackPanel Grid.ColumnSpan="5" Margin="0,0,-0.6,0">
+
+                        <Label Content="nom de l'espece" VerticalAlignment="Center" Margin="15" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <!--            <TextBox Name="nomTextBox" TextChanged="nomChanged"/> -->
+                        <TextBox Name="nom_especeTextBox" Height="30" Width="400" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label Content="Genre de l'espèce" VerticalAlignment="Center" Margin="15" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <!-- <TextBox Name="prenomTextBox" TextChanged="prenomChanged"/> -->
+                        <TextBox Name="genre_especeTextBox" Height="30" Width="400" Margin="5" />
+                        <Button x:Name="ajouterEspeceButton" Content="Ajouter" MouseDoubleClick="ajouterEspeceButton_MouseDoubleClick" BorderBrush="#FF545454"  Height="35" Margin="311,5,312.2,0" RenderTransformOrigin="0.5,2.31" >
+                            <Button.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-0.097"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Button.RenderTransform>
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Green" Offset="0.279"/>
+                                    <GradientStop Color="Green" Offset="0.779"/>
+                                    <GradientStop Color="Green" Offset="0.986"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+
+
+            <TabItem Header="Liste des Especes" Background="AliceBlue">
+
+                <StackPanel>
+
+                    <Grid Margin="10">
+                        <ScrollViewer Height="350" VerticalScrollBarVisibility="Visible">
+                            <DataGrid Name="listeEspece" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Center" BorderBrush="Black" Background="#FFA4A4A4" SelectionChanged="listeEspeces_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="id" Binding="{Binding idEspeceProperty, Mode=OneWay}" />
+                                    <DataGridTextColumn Header="Nom de l'espece" Binding="{Binding nomProperty}" />
+                                    <DataGridTextColumn Header="Genre de l'espece" Binding="{Binding genreProperty, Mode=TwoWay}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Button x:Name="supprimerButton_Espece" Content="Supprimer" MouseDoubleClick="supprimerButton_Espece_MouseDoubleClick" BorderBrush="#FF545454" HorizontalAlignment="Center"  Height="35" Width="101" >
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0.279"/>
+                                <GradientStop Color="Red" Offset="0.779"/>
+                                <GradientStop Color="Red" Offset="0.986"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+
+            </TabItem>
+            <!-- ###########################################FIN DE L'AJOUT DE PRELEVEMENT ###############################################################-->
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+            <!-- ###########################################DEBUT DE L'AJOUT DES ETUDES ###############################################################-->
+
+            <TabItem Header="Ajouter Etude" Background="Aqua">
+                <Grid Name ="gridEtude" Height="300" Margin="0,0,0.300,0" VerticalAlignment="Top" Background="FloralWhite">
+                    <StackPanel Grid.ColumnSpan="5" Margin="0,0,-0.6,0">
+
+                        <Label Content="Date De L'etude" VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <!--            <TextBox Name="nomTextBox" TextChanged="nomChanged"/> -->
+                        <!--  <TextBox Name="Date_etudeTextBox" Height="20" TextChanged="DateEtudeChanged"/>-->
+                        <DatePicker Name="Date_etudeTextBox" Width="400" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" ></DatePicker>
+                        <Label Content="Superficie De L'etude" VerticalAlignment="Center" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <!-- <TextBox Name="prenomTextBox" TextChanged="prenomChanged"/> -->
+                        <TextBox Name="Super_etudeTextBox" Width="400" Height="30" VerticalContentAlignment="Center" HorizontalAlignment="Center" />
+                        <Button x:Name="ajouterEtudeButton" Content="Ajouter" MouseDoubleClick="ajouterEtudeButton_MouseDoubleClick" BorderBrush="#FF545454"  Height="35" Margin="0,5,323.2,0" HorizontalAlignment="Right" Width="139" RenderTransformOrigin="0.5,2.31" >
+                            <Button.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="Green" Offset="0.279"/>
+                                    <GradientStop Color="Green" Offset="0.779"/>
+                                    <GradientStop Color="Green" Offset="0.986"/>
+                                </RadialGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+
+
+            <TabItem Header="Liste des Etudes" Background="Aqua">
+
+                <StackPanel>
+                    <Grid Margin="10" Width="775">
+                        <ScrollViewer Height="350" VerticalScrollBarVisibility="Visible">
+
+                            <DataGrid Name="listeEtude" ItemsSource="{Binding}" AutoGenerateColumns="false"  HorizontalAlignment="Left" BorderBrush="Black" Background="#FFA4A4A4" SelectionChanged="listeEtudes_SelectionChanged" Margin="229,0,0,0" Width="306" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="id" Binding="{Binding idEtudeProperty, Mode=OneWay}" />
+                                    <DataGridTextColumn Header="Date de L'étude" Binding="{Binding DateProperty}" />
+                                    <DataGridTextColumn Header="Superficie de L'étude" Binding="{Binding SuperficieEtudierProperty, Mode=TwoWay}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Button x:Name="supprimerButton_Etude" Content="Supprimer" MouseDoubleClick="supprimerButton_Etude_MouseDoubleClick" HorizontalAlignment="Center" BorderBrush="#FF545454"  Height="35" Width="100">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0.279"/>
+                                <GradientStop Color="Red" Offset="0.779"/>
+                                <GradientStop Color="Red" Offset="0.986"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+
+            </TabItem>
+
+            <!-- ###########################################FIN DE L'AJOUT DE L'ETUDE ###############################################################-->
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+
+            <!-- ###########################################DEBUT DE L'AJOUT DES PLAGES ###############################################################-->
+
+            <TabItem Header="Ajouter Plage" Background="LightYellow">
+                <Grid Name ="gridPlage" Margin="0,0,0.300,0" VerticalAlignment="Top">
+
+                    <StackPanel Grid.ColumnSpan="5" Margin="0,0,-0.6,0">
+
+                        <Label Content="Nom de la Plage" VerticalAlignment="Center" Margin="15" FontWeight="Heavy" HorizontalAlignment="Center"></Label>
+                        <TextBox Name="nomPlageTextBox" Width="400" Height="30" VerticalContentAlignment="Center" Margin="15" HorizontalAlignment="Center"/>
+                        <ComboBox Name="liste_box2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="445"  Height="29" Margin="20" >
+                            
+                        </ComboBox>
+                        
+                        <ComboBox Name="liste_box1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="445"  Height="29" Margin="20" />
+
+                        <ComboBox Name="liste_box3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="445"  Height="29" Margin="20" />
+                        
+                        
+                        <Button Name="ajouterPlageButton" Background="Green"  Content="Ajouter"  MouseDoubleClick="ajouterPlageButton_MouseDoubleClick" BorderBrush="#FF545454"  Height="35" Margin="40" Width="100" >
+
+                        </Button>
+                        <!--  <TextBox Name="Date_etudeTextBox" Height="20" TextChanged="DateEtudeChanged"/>-->
+                        <!-- <DatePicker Name="nom_plageTextBox" Height="20" ></DatePicker> -->
+
+                        <!-- <TextBox Name="prenomTextBox" TextChanged="prenomChanged"/> -->
+                        <!-- <TextBox Name="Super_etudeTextBox" Height="20" Margin="0,0,0.300,0" />-->
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+
+
+            <TabItem Header="Liste des plages" Background="LightYellow">
+
+                <StackPanel>
+                    <Grid Margin="10">
+                        <ScrollViewer Height="350" VerticalScrollBarVisibility="Visible">
+                            <DataGrid Name="listePlages" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Center"  BorderBrush="Black" Background="#FFA4A4A4" SelectionChanged="listePlages_SelectionChanged" Width="411">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="id" Binding="{Binding idPlageProperty, Mode=OneWay}" />
+                                    <DataGridTextColumn Header="nom de la plage " Binding="{Binding nomProperty}" />
+                                    <DataGridTextColumn Header="nom de la ville " Binding="{Binding commune.nomVilleProperty}" />
+                                    <DataGridTextColumn Header="id Prelevement " Binding="{Binding prelevement.idprelevementProperty, Mode=OneWay }" />
+                                    <DataGridTextColumn Header="Nom du Departement " Binding="{Binding departement.nomProperty, Mode=OneWay }" />
+                                    <!--   <DataGridTextColumn Header="Superficie de L'étude" Binding="{Binding SuperficieEtudierProperty, Mode=TwoWay}" />-->
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </ScrollViewer>
+                    </Grid>
+                    <Button x:Name="supprimerButton_Plage" Content="Supprimer" MouseDoubleClick="supprimerButton_Plage_MouseDoubleClick" BorderBrush="#FF545454"  Height="35" Width="100" HorizontalAlignment="Center">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0.279"/>
+                                <GradientStop Color="Red" Offset="0.779"/>
+                                <GradientStop Color="Red" Offset="0.986"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                </StackPanel>
+
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+
+</Window>

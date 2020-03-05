@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfApp11.Vue.loginWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp11.Vue"
+        mc:Ignorable="d"
+        Title="loginWindows" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel>
+
+            
+
+            <Label   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="300" Content="Utilisateur" ></Label>
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="300" Name="nomTextBox" />
+            <Label   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="300" Content="Mot de passe" ></Label>
+            <TextBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="300" Name="hh" />
+
+            <Button FontSize="22" Content="Connexion" Height="40" Width="300" Click="Button_Click" Margin="0,30,0,0"/>
+
+
+        </StackPanel>
+    </DockPanel>
+</Window>
