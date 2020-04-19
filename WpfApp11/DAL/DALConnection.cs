@@ -16,7 +16,7 @@ namespace WpfApp11
             if (connection == null) //  si la connexion est déjà ouverte, il ne la refera pas 
             {
                 server = "localhost";
-                database = "ifrocean2";
+                database = "ifrocean";
                 uid = "root";
                 password = "";
                 string connectionString;
